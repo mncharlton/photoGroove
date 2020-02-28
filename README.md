@@ -1,3 +1,3 @@
 ## Elm-in-action
 
-Repo for following the Elm-in-action book (http://elm-in-action.com/)
+Repo for my version of the PhotoGroove app from Elm In Action (http://elm-in-action.com/)
