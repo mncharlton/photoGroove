@@ -6,6 +6,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 
 
+urlPrefix : String
 urlPrefix =
     "http://elm-in-action.com/"
 
@@ -27,6 +28,7 @@ viewThumbnail selectedURL thumb =
         []
 
 
+initialModel : { photos : List { url : String }, selectedURL : String }
 initialModel =
     { photos =
         [ { url = "1.jpeg" }
