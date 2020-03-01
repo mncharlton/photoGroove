@@ -23,6 +23,8 @@ type alias Msg =
     , data : String
     }
 
+
+view : Model -> Html Msg
 view model =
     div [ class "content" ]
         [ h1 [] [ text "Photo Groove" ]
@@ -31,6 +33,7 @@ view model =
         ]
 
 
+viewThumbnail : String -> Photo -> Html Msg
 viewThumbnail selectedURL thumb =
     img
         [ src (urlPrefix ++ thumb.url)
@@ -40,11 +43,11 @@ viewThumbnail selectedURL thumb =
         []
 
 
-initialModel : { photos : List { url : String }, selectedURL : String }
 type alias Photo =
     { url : String }
 
 
+initialModel : Model
 initialModel =
     { photos =
         [ { url = "1.jpeg" }
@@ -55,7 +58,7 @@ initialModel =
     }
 
 
-photoArray : Array { url : String }
+photoArray : Array Photo
 photoArray =
     Array.fromList initialModel.photos
 
