@@ -12,6 +12,17 @@ urlPrefix =
     "http://elm-in-action.com/"
 
 
+type alias Model =
+    { photos : List Photo
+    , selectedURL : String
+    }
+
+
+type alias Msg =
+    { description : String
+    , data : String
+    }
+
 view model =
     div [ class "content" ]
         [ h1 [] [ text "Photo Groove" ]
@@ -30,6 +41,10 @@ viewThumbnail selectedURL thumb =
 
 
 initialModel : { photos : List { url : String }, selectedURL : String }
+type alias Photo =
+    { url : String }
+
+
 initialModel =
     { photos =
         [ { url = "1.jpeg" }
