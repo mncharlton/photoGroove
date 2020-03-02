@@ -38,6 +38,7 @@ view model =
         , button
             [ onClick { description = "ClickedSupriseMe", data = "" } ]
             [ text "Surprise Me!" ]
+        , h3 [] [ text "Thumbnail Size:" ]
         , div [ id "choose-size" ] (List.map viewSizeChooser [ Small, Medium, Large ])
         , div [ id "thumbnails", class (sizeToString model.chosenSize) ] (List.map (viewThumbnail model.selectedURL) model.photos)
         , img [ class "large", src (urlPrefix ++ "large/" ++ model.selectedURL) ] []
