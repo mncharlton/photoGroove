@@ -5178,20 +5178,24 @@ var $elm$browser$Browser$sandbox = function (impl) {
 };
 var $author$project$PhotoGroove$update = F2(
 	function (msg, model) {
-		var _v0 = msg.description;
-		switch (_v0) {
+		switch (msg.$) {
 			case 'ClickedPhoto':
+				var url = msg.a;
 				return _Utils_update(
 					model,
-					{selectedURL: msg.data});
-			case 'ClickedSupriseMe':
+					{selectedURL: url});
+			case 'ClickedSize':
+				var size = msg.a;
+				return _Utils_update(
+					model,
+					{chosenSize: size});
+			default:
 				return _Utils_update(
 					model,
 					{selectedURL: '2.jpeg'});
-			default:
-				return model;
 		}
 	});
+var $author$project$PhotoGroove$ClickedSupriseMe = {$: 'ClickedSupriseMe'};
 var $author$project$PhotoGroove$Large = {$: 'Large'};
 var $author$project$PhotoGroove$Small = {$: 'Small'};
 var $elm$html$Html$button = _VirtualDom_node('button');
@@ -5206,6 +5210,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
@@ -5244,6 +5249,17 @@ var $elm$html$Html$Attributes$src = function (url) {
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$PhotoGroove$urlPrefix = 'http://elm-in-action.com/';
+var $author$project$PhotoGroove$ClickedSize = function (a) {
+	return {$: 'ClickedSize', a: a};
+};
+var $elm$virtual_dom$VirtualDom$attribute = F2(
+	function (key, value) {
+		return A2(
+			_VirtualDom_attribute,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$html$Html$Attributes$name = $elm$html$Html$Attributes$stringProperty('name');
@@ -5259,12 +5275,21 @@ var $author$project$PhotoGroove$viewSizeChooser = function (size) {
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$type_('radio'),
-						$elm$html$Html$Attributes$name('size')
+						$elm$html$Html$Attributes$name('size'),
+						A2(
+						$elm$html$Html$Attributes$attribute,
+						'data-size',
+						$author$project$PhotoGroove$sizeToString(size)),
+						$elm$html$Html$Events$onClick(
+						$author$project$PhotoGroove$ClickedSize(size))
 					]),
 				_List_Nil),
 				$elm$html$Html$text(
 				$author$project$PhotoGroove$sizeToString(size))
 			]));
+};
+var $author$project$PhotoGroove$ClickedPhoto = function (a) {
+	return {$: 'ClickedPhoto', a: a};
 };
 var $elm$core$List$filter = F2(
 	function (isGood, list) {
@@ -5307,7 +5332,7 @@ var $author$project$PhotoGroove$viewThumbnail = F2(
 							_Utils_eq(selectedURL, thumb.url))
 						])),
 					$elm$html$Html$Events$onClick(
-					{data: thumb.url, description: 'ClickedPhoto'})
+					$author$project$PhotoGroove$ClickedPhoto(thumb.url))
 				]),
 			_List_Nil);
 	});
@@ -5331,12 +5356,18 @@ var $author$project$PhotoGroove$view = function (model) {
 				$elm$html$Html$button,
 				_List_fromArray(
 					[
-						$elm$html$Html$Events$onClick(
-						{data: '', description: 'ClickedSupriseMe'})
+						$elm$html$Html$Events$onClick($author$project$PhotoGroove$ClickedSupriseMe)
 					]),
 				_List_fromArray(
 					[
 						$elm$html$Html$text('Surprise Me!')
+					])),
+				A2(
+				$elm$html$Html$h3,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Thumbnail Size:')
 					])),
 				A2(
 				$elm$html$Html$div,
